@@ -9,6 +9,7 @@ type: software
 authors:
   - given-names: Evgeny
     family-names: Vyaltsev
+    orcid: 'https://orcid.org/0009-0004-3712-6798'
   - given-names: Daniil
     family-names: Vyaltsev
 abstract: >-
@@ -32,3 +33,8 @@ keywords:
 license: MIT
 version: 1.0.0
 date-released: '2026-05-17'
+doi: 10.5281/zenodo.20257482
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.20257482
+    description: Archived release on Zenodo
