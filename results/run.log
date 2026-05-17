@@ -1,0 +1,36 @@
+============================================================
+Causal spectral ablation — Llama-3.2-1B
+  n_prompts=25, n_tokens=256
+  n_bands=3, heads_per_band=4
+============================================================
+  sampled 12 pairs from /home/user/dcr-attention/benchmarks/xmodel_uprofile/results/llama/meta-llama_Llama-3.2-1B/rows.jsonl
+    L 0 H27  chi_med=0.2889  band=early
+    L 4 H23  chi_med=0.6380  band=early
+    L 1 H17  chi_med=0.7586  band=early
+    L 3 H 3  chi_med=0.8564  band=early
+    L 9 H24  chi_med=0.4187  band=middle
+    L10 H22  chi_med=0.5687  band=middle
+    L 9 H 5  chi_med=0.6554  band=middle
+    L10 H29  chi_med=0.8243  band=middle
+    L13 H22  chi_med=0.5706  band=late
+    L14 H14  chi_med=0.6378  band=late
+    L15 H26  chi_med=0.6994  band=late
+    L12 H11  chi_med=0.8684  band=late
+  loaded + patched Llama-3.2-1B
+Token indices sequence length is longer than the specified maximum sequence length for this model (289076 > 131072). Running this sequence through the model will result in indexing errors
+  loaded 25 prompts of 256 tokens each
+  [1/12] L0 H27 done in 4.9s cumulative
+  [2/12] L4 H23 done in 9.3s cumulative
+  [3/12] L1 H17 done in 13.3s cumulative
+  [4/12] L3 H3 done in 18.4s cumulative
+  [5/12] L9 H24 done in 22.4s cumulative
+  [6/12] L10 H22 done in 26.5s cumulative
+  [7/12] L9 H5 done in 30.8s cumulative
+  [8/12] L10 H29 done in 35.3s cumulative
+  [9/12] L13 H22 done in 39.4s cumulative
+  [10/12] L14 H14 done in 43.7s cumulative
+  [11/12] L15 H26 done in 48.0s cumulative
+  [12/12] L12 H11 done in 52.2s cumulative
+
+  Saved 300 rows to /home/user/dcr-attention/benchmarks/spectral_ablation/results/rows.jsonl
+  ablation logs: /home/user/dcr-attention/benchmarks/spectral_ablation/results/ablation_logs.json

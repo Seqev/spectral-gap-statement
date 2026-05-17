@@ -1,0 +1,106 @@
+{
+  "model": "meta-llama/Llama-3.2-1B",
+  "n_pairs": 12,
+  "pairs": [
+    {
+      "layer_idx": 0,
+      "head": 27,
+      "chi_median": 0.28885652151076496,
+      "band": 0,
+      "band_label": "early",
+      "source": "xmodel_uprofile"
+    },
+    {
+      "layer_idx": 4,
+      "head": 23,
+      "chi_median": 0.6380116083079707,
+      "band": 0,
+      "band_label": "early",
+      "source": "xmodel_uprofile"
+    },
+    {
+      "layer_idx": 1,
+      "head": 17,
+      "chi_median": 0.7585767084552419,
+      "band": 0,
+      "band_label": "early",
+      "source": "xmodel_uprofile"
+    },
+    {
+      "layer_idx": 3,
+      "head": 3,
+      "chi_median": 0.8563971372886714,
+      "band": 0,
+      "band_label": "early",
+      "source": "xmodel_uprofile"
+    },
+    {
+      "layer_idx": 9,
+      "head": 24,
+      "chi_median": 0.41870627174018465,
+      "band": 1,
+      "band_label": "middle",
+      "source": "xmodel_uprofile"
+    },
+    {
+      "layer_idx": 10,
+      "head": 22,
+      "chi_median": 0.5687291344166592,
+      "band": 1,
+      "band_label": "middle",
+      "source": "xmodel_uprofile"
+    },
+    {
+      "layer_idx": 9,
+      "head": 5,
+      "chi_median": 0.6553528748360941,
+      "band": 1,
+      "band_label": "middle",
+      "source": "xmodel_uprofile"
+    },
+    {
+      "layer_idx": 10,
+      "head": 29,
+      "chi_median": 0.8242987209633295,
+      "band": 1,
+      "band_label": "middle",
+      "source": "xmodel_uprofile"
+    },
+    {
+      "layer_idx": 13,
+      "head": 22,
+      "chi_median": 0.5705936239573052,
+      "band": 2,
+      "band_label": "late",
+      "source": "xmodel_uprofile"
+    },
+    {
+      "layer_idx": 14,
+      "head": 14,
+      "chi_median": 0.6378103989922828,
+      "band": 2,
+      "band_label": "late",
+      "source": "xmodel_uprofile"
+    },
+    {
+      "layer_idx": 15,
+      "head": 26,
+      "chi_median": 0.6993905933201566,
+      "band": 2,
+      "band_label": "late",
+      "source": "xmodel_uprofile"
+    },
+    {
+      "layer_idx": 12,
+      "head": 11,
+      "chi_median": 0.8684478309332209,
+      "band": 2,
+      "band_label": "late",
+      "source": "xmodel_uprofile"
+    }
+  ],
+  "n_prompts": 25,
+  "n_tokens": 256,
+  "seed": 0,
+  "wall_total_s": 52.248284578323364
+}

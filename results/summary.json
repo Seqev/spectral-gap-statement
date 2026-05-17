@@ -1,0 +1,433 @@
+{
+  "overall": {
+    "n_rows": 300,
+    "mean_delta_NLL_treatment": 0.0005950510501861572,
+    "mean_delta_NLL_control": 0.00032321532567342124,
+    "mean_diff_NLL": 0.000271835724512736,
+    "ci95_diff_NLL": [
+      -0.0001662093997001648,
+      0.000695733735958735
+    ],
+    "wilcoxon_p_diff_NLL": 0.25575043875677117,
+    "mean_KL_treatment": 0.001313729668133116,
+    "mean_KL_control": 0.0007814069374580868,
+    "mean_diff_KL": 0.0005323227306750293,
+    "ci95_diff_KL": [
+      0.00043181825194672763,
+      0.0006446174256901333
+    ],
+    "wilcoxon_p_diff_KL": 2.941050486542593e-39
+  },
+  "by_layer_band": {
+    "early": {
+      "n": 100,
+      "mean_diff_NLL": -0.00021142244338989257,
+      "ci95_diff_NLL": [
+        -0.0011846496164798737,
+        0.000784953117370602
+      ],
+      "wilcoxon_p_diff_NLL": 0.5292087183010803,
+      "mean_diff_KL": 0.0008497047267155722,
+      "ci95_diff_KL": [
+        0.000585649647808168,
+        0.0011607921758259169
+      ],
+      "wilcoxon_p_diff_KL": 6.431315816976964e-14
+    },
+    "late": {
+      "n": 100,
+      "mean_diff_NLL": 0.0004785263538360596,
+      "ci95_diff_NLL": [
+        -0.000125213086605072,
+        0.0011307863593101497
+      ],
+      "wilcoxon_p_diff_NLL": 0.2872551707445372,
+      "mean_diff_KL": 0.0005079474940430373,
+      "ci95_diff_KL": [
+        0.0003974780795833795,
+        0.0006299405247409595
+      ],
+      "wilcoxon_p_diff_KL": 1.3329700507875106e-17
+    },
+    "middle": {
+      "n": 100,
+      "mean_diff_NLL": 0.000548403263092041,
+      "ci95_diff_NLL": [
+        2.9003113508224494e-05,
+        0.0010916081368923184
+      ],
+      "wilcoxon_p_diff_NLL": 0.06558869366620086,
+      "mean_diff_KL": 0.0002393159712664783,
+      "ci95_diff_KL": [
+        0.00017969901041942649,
+        0.0002993340142274974
+      ],
+      "wilcoxon_p_diff_KL": 7.860224511916034e-10
+    }
+  },
+  "by_chi_band": {
+    "low": {
+      "n": 75,
+      "chi_range": [
+        -Infinity,
+        0.5701275015721436
+      ],
+      "mean_diff_NLL": 0.0003423817952473958,
+      "ci95_diff_NLL": [
+        -0.00029552487532297765,
+        0.000977600296338399
+      ],
+      "mean_diff_KL": 0.00015328272866706053,
+      "ci95_diff_KL": [
+        8.688654265521716e-05,
+        0.00022557657650516659
+      ]
+    },
+    "med-lo": {
+      "n": 75,
+      "chi_range": [
+        0.5701275015721436,
+        0.6466822415720324
+      ],
+      "mean_diff_NLL": -1.7757415771484376e-05,
+      "ci95_diff_NLL": [
+        -0.0009112443526585896,
+        0.0009263114929199212
+      ],
+      "mean_diff_KL": 0.0005223586689680815,
+      "ci95_diff_KL": [
+        0.00037779585857060735,
+        0.0006891217962547671
+      ]
+    },
+    "med-hi": {
+      "n": 75,
+      "chi_range": [
+        0.6466822415720324,
+        0.7750072115822638
+      ],
+      "mean_diff_NLL": 8.986314137776693e-05,
+      "ci95_diff_NLL": [
+        -0.0009564625422159831,
+        0.0011393495003382363
+      ],
+      "mean_diff_KL": 0.001099066473155593,
+      "ci95_diff_KL": [
+        0.0007571846317538681,
+        0.0014747185041778718
+      ]
+    },
+    "high": {
+      "n": 75,
+      "chi_range": [
+        0.7750072115822638,
+        Infinity
+      ],
+      "mean_diff_NLL": 0.0006728553771972656,
+      "ci95_diff_NLL": [
+        -3.197550773620604e-05,
+        0.0014115499655405676
+      ],
+      "mean_diff_KL": 0.0003545830519093821,
+      "ci95_diff_KL": [
+        0.0003034090324363206,
+        0.00040788297186372793
+      ]
+    }
+  },
+  "per_pair": [
+    {
+      "layer_idx": 0,
+      "head": 27,
+      "chi_median": 0.28885652151076496,
+      "band": "early",
+      "n_prompts": 25,
+      "mean_diff_NLL": -0.00024042606353759765,
+      "ci95_diff_NLL": [
+        -0.0015452703237533569,
+        0.0009479737281799304
+      ],
+      "mean_diff_KL": -9.959470480680465e-06,
+      "ci95_diff_KL": [
+        -2.736991475103423e-05,
+        8.611776982434078e-06
+      ]
+    },
+    {
+      "layer_idx": 1,
+      "head": 17,
+      "chi_median": 0.7585767084552419,
+      "band": "early",
+      "n_prompts": 25,
+      "mean_diff_NLL": -0.0008963108062744141,
+      "ci95_diff_NLL": [
+        -0.0036730294227600097,
+        0.001973532676696776
+      ],
+      "mean_diff_KL": 0.002791277505457401,
+      "ci95_diff_KL": [
+        0.0021141630151541905,
+        0.0035245932016987344
+      ]
+    },
+    {
+      "layer_idx": 3,
+      "head": 3,
+      "chi_median": 0.8563971372886714,
+      "band": "early",
+      "n_prompts": 25,
+      "mean_diff_NLL": 0.0015275859832763672,
+      "ci95_diff_NLL": [
+        9.84334945678711e-05,
+        0.0030910587310791007
+      ],
+      "mean_diff_KL": 0.0004073537117801607,
+      "ci95_diff_KL": [
+        0.00031079609476728366,
+        0.0005105960264918394
+      ]
+    },
+    {
+      "layer_idx": 4,
+      "head": 23,
+      "chi_median": 0.6380116083079707,
+      "band": "early",
+      "n_prompts": 25,
+      "mean_diff_NLL": -0.0012365388870239258,
+      "ci95_diff_NLL": [
+        -0.0027815678119659424,
+        0.0003780159950256346
+      ],
+      "mean_diff_KL": 0.00021014716010540725,
+      "ci95_diff_KL": [
+        0.00010952813259791583,
+        0.0003061541020288132
+      ]
+    },
+    {
+      "layer_idx": 9,
+      "head": 5,
+      "chi_median": 0.6553528748360941,
+      "band": "middle",
+      "n_prompts": 25,
+      "mean_diff_NLL": 0.00038787364959716794,
+      "ci95_diff_NLL": [
+        -0.00038883936405181884,
+        0.0012000041007995603
+      ],
+      "mean_diff_KL": 1.7601249273866414e-05,
+      "ci95_diff_KL": [
+        -2.850710821803658e-06,
+        3.760579333174969e-05
+      ]
+    },
+    {
+      "layer_idx": 9,
+      "head": 24,
+      "chi_median": 0.41870627174018465,
+      "band": "middle",
+      "n_prompts": 25,
+      "mean_diff_NLL": 0.0003166055679321289,
+      "ci95_diff_NLL": [
+        -0.0007551559209823608,
+        0.0013683999776840205
+      ],
+      "mean_diff_KL": -4.692074842751026e-05,
+      "ci95_diff_KL": [
+        -0.00012265753973042594,
+        2.9418448451906396e-05
+      ]
+    },
+    {
+      "layer_idx": 10,
+      "head": 22,
+      "chi_median": 0.5687291344166592,
+      "band": "middle",
+      "n_prompts": 25,
+      "mean_diff_NLL": 0.0009509658813476562,
+      "ci95_diff_NLL": [
+        -1.877403259277343e-05,
+        0.001893649816513061
+      ],
+      "mean_diff_KL": 0.0005167284049093724,
+      "ci95_diff_KL": [
+        0.00044336007250240074,
+        0.0006049687931663357
+      ]
+    },
+    {
+      "layer_idx": 10,
+      "head": 29,
+      "chi_median": 0.8242987209633295,
+      "band": "middle",
+      "n_prompts": 25,
+      "mean_diff_NLL": 0.0005381679534912109,
+      "ci95_diff_NLL": [
+        -0.0007538425922393798,
+        0.0019341888427734375
+      ],
+      "mean_diff_KL": 0.0004698549793101847,
+      "ci95_diff_KL": [
+        0.00038279330590739846,
+        0.0005631971586844884
+      ]
+    },
+    {
+      "layer_idx": 12,
+      "head": 11,
+      "chi_median": 0.8684478309332209,
+      "band": "late",
+      "n_prompts": 25,
+      "mean_diff_NLL": -4.718780517578125e-05,
+      "ci95_diff_NLL": [
+        -0.0008753986358642577,
+        0.0007554242610931395
+      ],
+      "mean_diff_KL": 0.00018654046463780104,
+      "ci95_diff_KL": [
+        0.00015586637012893334,
+        0.00022020750679075713
+      ]
+    },
+    {
+      "layer_idx": 13,
+      "head": 22,
+      "chi_median": 0.5705936239573052,
+      "band": "late",
+      "n_prompts": 25,
+      "mean_diff_NLL": -0.0007855129241943359,
+      "ci95_diff_NLL": [
+        -0.0017859721183776855,
+        0.00020547294616699187
+      ],
+      "mean_diff_KL": 9.909669402986765e-05,
+      "ci95_diff_KL": [
+        7.748650462599471e-05,
+        0.00012040776648791505
+      ]
+    },
+    {
+      "layer_idx": 14,
+      "head": 14,
+      "chi_median": 0.6378103989922828,
+      "band": "late",
+      "n_prompts": 25,
+      "mean_diff_NLL": 0.0019687795639038086,
+      "ci95_diff_NLL": [
+        0.00023604917526245123,
+        0.0038008456230163574
+      ],
+      "mean_diff_KL": 0.0012578321527689695,
+      "ci95_diff_KL": [
+        0.000990971538471058,
+        0.001560464443435194
+      ]
+    },
+    {
+      "layer_idx": 15,
+      "head": 26,
+      "chi_median": 0.6993905933201566,
+      "band": "late",
+      "n_prompts": 25,
+      "mean_diff_NLL": 0.0007780265808105469,
+      "ci95_diff_NLL": [
+        -0.00019788718223571775,
+        0.0017172288894653307
+      ],
+      "mean_diff_KL": 0.000488320664735511,
+      "ci95_diff_KL": [
+        0.00039677737225429153,
+        0.000577856375806732
+      ]
+    }
+  ],
+  "matched_magnitude_check": [
+    {
+      "layer_idx": 0,
+      "head": 27,
+      "treatment_delta_F_mean": 20.129974212646484,
+      "control_delta_F_mean": 20.1299747467041,
+      "ratio_t_over_c": 0.9999999734695337
+    },
+    {
+      "layer_idx": 4,
+      "head": 23,
+      "treatment_delta_F_mean": 33.94856643676758,
+      "control_delta_F_mean": 33.94855201721192,
+      "ratio_t_over_c": 1.0000004247472958
+    },
+    {
+      "layer_idx": 1,
+      "head": 17,
+      "treatment_delta_F_mean": 40.28484222412109,
+      "control_delta_F_mean": 40.284930572509765,
+      "ratio_t_over_c": 0.9999978069122271
+    },
+    {
+      "layer_idx": 3,
+      "head": 3,
+      "treatment_delta_F_mean": 30.164758529663086,
+      "control_delta_F_mean": 30.164817504882812,
+      "ratio_t_over_c": 0.9999980449004965
+    },
+    {
+      "layer_idx": 9,
+      "head": 24,
+      "treatment_delta_F_mean": 54.57892158508301,
+      "control_delta_F_mean": 54.57893363952637,
+      "ratio_t_over_c": 0.9999997791374335
+    },
+    {
+      "layer_idx": 10,
+      "head": 22,
+      "treatment_delta_F_mean": 31.493225631713866,
+      "control_delta_F_mean": 31.49322196960449,
+      "ratio_t_over_c": 1.0000001162824617
+    },
+    {
+      "layer_idx": 9,
+      "head": 5,
+      "treatment_delta_F_mean": 15.28883373260498,
+      "control_delta_F_mean": 15.28883861541748,
+      "ratio_t_over_c": 0.9999996806289462
+    },
+    {
+      "layer_idx": 10,
+      "head": 29,
+      "treatment_delta_F_mean": 26.743047943115233,
+      "control_delta_F_mean": 26.743099365234375,
+      "ratio_t_over_c": 0.9999980771817641
+    },
+    {
+      "layer_idx": 13,
+      "head": 22,
+      "treatment_delta_F_mean": 9.31803611755371,
+      "control_delta_F_mean": 9.318039722442627,
+      "ratio_t_over_c": 0.9999996131279728
+    },
+    {
+      "layer_idx": 14,
+      "head": 14,
+      "treatment_delta_F_mean": 35.50503059387207,
+      "control_delta_F_mean": 35.505083084106445,
+      "ratio_t_over_c": 0.9999985216135321
+    },
+    {
+      "layer_idx": 15,
+      "head": 26,
+      "treatment_delta_F_mean": 39.13394912719727,
+      "control_delta_F_mean": 39.13393966674805,
+      "ratio_t_over_c": 1.0000002417453826
+    },
+    {
+      "layer_idx": 12,
+      "head": 11,
+      "treatment_delta_F_mean": 26.427614364624024,
+      "control_delta_F_mean": 26.427669830322266,
+      "ratio_t_over_c": 0.9999979012263057
+    }
+  ],
+  "outcome": "null",
+  "outcome_text": "Pre-registered NULL on the operationally meaningful test (NLL). Treatment-minus-control NLL: mean=2.718e-04, 95% CI [-1.662e-04, 6.957e-04] brackets zero, Wilcoxon p=2.558e-01. KL-divergence is detectably different (diff=5.323e-04, p=2.941e-39) but absolute scale is tiny \u2014 the dominant mode shifts the output distribution measurably without harming task performance, i.e. it is causally inert for next-token prediction. **Spectral-causality direction CLOSED.**",
+  "diff_ratio_nll": 0.4568275687064064
+}
