@@ -2,7 +2,9 @@
 
 **When the Negative Subspace of Attention Transport is a Well-Posed Invariant**
 
-Evgeny Vyaltsev and Daniil Vyaltsev
+Evgeny Vyaltsev ([ORCID 0009-0004-3712-6798](https://orcid.org/0009-0004-3712-6798)) and Daniil Vyaltsev
+
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20257482.svg)](https://doi.org/10.5281/zenodo.20257482)
 
 ---
 
@@ -110,7 +112,29 @@ Stated plainly, as in the manuscript:
 
 ## Citation
 
-See `CITATION.cff`. If you use this work, please cite the manuscript.
+If you use this work, please cite it via its archived DOI:
+
+> Vyaltsev, E. and Vyaltsev, D. (2026). *The Spectral Gap-Statement:
+> When the Negative Subspace of Attention Transport is a Well-Posed
+> Invariant.* Zenodo. https://doi.org/10.5281/zenodo.20257482
+
+BibTeX:
+
+```bibtex
+@misc{vyaltsev2026spectralgap,
+  author       = {Vyaltsev, Evgeny and Vyaltsev, Daniil},
+  title        = {The Spectral Gap-Statement: When the Negative
+                  Subspace of Attention Transport is a
+                  Well-Posed Invariant},
+  year         = {2026},
+  publisher    = {Zenodo},
+  doi          = {10.5281/zenodo.20257482},
+  url          = {https://doi.org/10.5281/zenodo.20257482}
+}
+```
+
+A `CITATION.cff` file is also provided; GitHub renders it under
+"Cite this repository".
 
 ## License
 
