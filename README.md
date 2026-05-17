@@ -37,7 +37,7 @@ trained Llama-3.2-1B.
 paper2.pdf              Compiled manuscript (13 pages)
 paper2.tex              Manuscript source
 section6_body.tex       The Gap-Statement body (\input by paper2.tex)
-refs.bib                Bibliography (12 published references)
+refs.bib                Bibliography (17 published references)
 figures/                Figures used in the paper
   section6_diagnostic.png    Fig. 1 — synthetic 4-panel verification
   geodesic_diagnostic.png    Fig. 2 — geodesic / Jacobi verification

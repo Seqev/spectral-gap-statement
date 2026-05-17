@@ -234,6 +234,52 @@ attention mechanism; it supplies the spectral foundation under an existing
 adaptive router, and asks whether the geometry that foundation predicts is
 actually present in a trained model.
 
+\paragraph{Attention as optimal transport.}
+The view of attention as a transport process has an established line.
+Daneshmand~\cite{daneshmand2024provable} shows that softmax self-attention
+layers can simulate gradient descent on the dual of the
+entropy-regularized optimal-transport problem, with transformer depth
+controlling the approximation accuracy. Litman~\cite{litman2025sdpa}
+proves that the scaled-dot-product attention forward pass is the exact
+solution of a one-sided entropic optimal-transport problem, and --- most
+relevant here --- analyses the \emph{information geometry} that this
+formulation induces on the space of attention distributions, via the
+Fisher information matrix. The present paper shares the premise that
+attention is a transport process, but its object is different. Those works
+study the transport \emph{map} (the attention weights themselves) and the
+geometry of the \emph{distribution simplex}; we study the Hessian of the
+free-energy potential \emph{with respect to the query position}, and the
+geometry of the \emph{query configuration space} through the
+Jacobi--Maupertuis metric. The Fisher geometry of
+Litman~\cite{litman2025sdpa} lives on the output simplex; our
+Jacobi--Maupertuis geometry lives on the input domain. They are
+complementary descriptions of the same mechanism from opposite ends.
+
+\paragraph{Hessian eigenvalues and spectral gaps in transformers.}
+Two neighbouring uses of spectral language must be distinguished from ours
+explicitly, since the words coincide while the objects do not. First, the
+\emph{loss-function Hessian}: negative eigenvalues of the training-loss
+Hessian of deep networks have been studied since
+Sagun et al.~\cite{sagun2016eigenvalues}, who identified the
+bulk-plus-outliers spectral structure, and Alain et
+al.~\cite{alain2019negative}, who examined the role of the negative
+eigenvalues directly. That Hessian is taken with respect to the
+\emph{model parameters} and describes the optimisation landscape; ours is
+taken with respect to the \emph{query position} and describes a transport
+landscape at a fixed, trained model --- a different operator on a different
+space, and the negative-eigenvalue count means a different thing. Second,
+the \emph{attention-matrix spectral gap}: Nait Saada et
+al.~\cite{naitsaada2025mindthegap} analyse the gap between the two largest
+singular values of the attention matrix itself, and identify it as the
+driver of rank collapse. That gap is a property of the row-stochastic
+attention matrix; ours is a property of the free-energy Hessian
+$H=-\beta\operatorname{Cov}_p(k)$, a symmetric negative-semidefinite
+operator. The two are not the same spectral object: theirs separates
+signal-propagation modes of a Markov matrix, ours separates the
+transport-instability subspace of a curvature operator. We adopt the term
+``spectral gap'' in its standard operator-theoretic sense and flag the
+coincidence to forestall confusion.
+
 % =====================================================================
 \section{Conclusion}
 \label{sec:conclusion}
