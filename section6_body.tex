@@ -1,0 +1,579 @@
+% =====================================================================
+%  SECTION 6 -- THE SPECTRAL GAP-STATEMENT
+%  Self-contained section in the notation of the Phi-Transport manuscript.
+%  Notation anchored to: Theorem 4.1 (inertial Wasserstein flow),
+%  Remark 4.3 / Corollary 4.4 (characteristic polynomial z^2+gamma z+kappa=0),
+%  Theorem 4.4 (entropy-induced friction tensor).
+%  All four claims are numerically verified in section6_consolidation.py;
+%  the corresponding figure is section6_diagnostic.png.
+% =====================================================================
+
+\section{The Spectral Gap-Statement: when the negative subspace is an invariant}
+\label{sec:gap}
+
+Sections~\ref{sec:inertial}--\ref{sec:friction} established that the negative
+part of the free-energy Hessian governs transport instability: a negative
+eigenvalue $\kappa<0$ in the characteristic polynomial $z^2+\gamma z+\kappa=0$
+of the characteristic polynomial (Section~\ref{sec:inertial}) produces an exponentially growing mode. The empirical
+rank-local law of Section~\ref{sec:multiaxis}, $r^\star \approx d_{\mathrm{eff}}-1$,
+implicitly assumes that the \emph{number} of such modes is a well-defined
+integer. This section makes that assumption precise. We show that the count
+$\dim E_-$ is a topological invariant --- threshold-free and perturbation-stable
+--- precisely when the Hessian spectrum possesses a gap, and that the three
+operating ``windows'' identified empirically in earlier sections are three
+coordinate sections of this single spectral condition.
+
+\subsection{The free-energy Hessian and its negative subspace}
+\label{sec:gap:hessian}
+
+We work with the general free-energy potential
+\begin{equation}
+  \Phi_\beta(x) \;=\; \frac1\beta \log \sum_{j} e^{-\beta U_j(x)},
+  \label{eq:gap:freeenergy}
+\end{equation}
+of which LogSumExp attention (Section~3.6) is the special case
+$U_j(x)=-\langle x,k_j\rangle$. Differentiating \eqref{eq:gap:freeenergy}
+twice gives the exact exponential-family identity
+\begin{equation}
+  \nabla^2 \Phi_\beta
+   \;=\; \underbrace{\mathbb{E}_p[\nabla^2 U_j]}_{\text{mean-curvature term}}
+   \;-\; \beta\,\underbrace{\operatorname{Cov}_p(\nabla U_j)}_{\text{fluctuation term}},
+  \label{eq:gap:identity}
+\end{equation}
+where $p_j \propto e^{-\beta U_j(x)}$ is the Gibbs weight. Identity
+\eqref{eq:gap:identity} is elementary --- it is the Hessian of the
+cumulant-generating function of an exponential family --- and it is the
+structural reason the mechanism of this paper is not specific to attention.
+For \emph{linear} logits the mean-curvature term vanishes identically,
+$\nabla^2 U_j \equiv 0$, and the Hessian reduces to the pure fluctuation term
+\begin{equation}
+  H \;:=\; \nabla^2 \Phi_\beta^{\,\mathrm{attn}}
+        \;=\; -\beta\,\operatorname{Cov}_p(k) \;\preceq\; 0.
+  \label{eq:gap:attn}
+\end{equation}
+Two consequences of \eqref{eq:gap:attn} are used below. First, $H$ is
+negative semidefinite: every eigenvalue is $\le 0$, so the spectrum does
+\emph{not} split around the origin. Second, $\operatorname{Cov}_p(k)$ of a
+discrete distribution on $N$ points has rank at most $N-1$, because the
+normalization $\sum_j p_j = 1$ forces $\sum_j p_j (k_j-\bar k)=0$. This rank
+defect is the covariance mean-gauge; it is the structural origin of the
+intercept $-1$ in the rank-local law, and it does not require any fitted
+constant.
+
+\begin{definition}[Negative subspace and its count]
+\label{def:gap:Eminus}
+For a threshold $\theta>0$ let
+$E_-(\theta) := \operatorname{span}\{\,v : Hv=\lambda v,\ \lambda < -\theta\,\}$
+and $\dim E_-(\theta) := \dim E_-(\theta)$. We call $\dim E_-$
+\emph{well-posed} if it is independent of $\theta$ over an open interval of
+thresholds.
+\end{definition}
+
+The cluster geometry that recurs throughout this paper --- $m$ key clusters
+with inter-cluster separation large relative to intra-cluster width ---
+produces a spectrum of $H$ with two scales: $m-1$ strongly negative
+eigenvalues $\mu_1\le\dots\le\mu_{m-1}$ (the inter-cluster, defocusing modes)
+and a remainder of eigenvalues near zero (the intra-cluster modes). We stress
+that the intra-cluster eigenvalues are \emph{negative}, not positive: by
+\eqref{eq:gap:attn} no eigenvalue of $H$ is positive. The relevant gap is
+therefore an interval $(\lambda_{\mathrm{lo}},\lambda_{\mathrm{hi}})$ with
+\emph{both} endpoints negative, lying \emph{inside} the negative spectrum, and
+\emph{not} an interval straddling the origin.
+
+\subsection{The Riesz projector: a threshold-free count}
+\label{sec:gap:riesz}
+
+The count of Definition~\ref{def:gap:Eminus} is made canonical by the Riesz
+spectral projector. Let $\Gamma$ be a positively-oriented Jordan contour in
+$\mathbb{C}$ enclosing exactly the eigenvalues $\{\lambda<-\theta\}$ and no
+others. The projector
+\begin{equation}
+  P_\theta \;=\; \frac{1}{2\pi i} \oint_\Gamma (zI-H)^{-1}\, dz
+  \label{eq:gap:riesz}
+\end{equation}
+is the spectral projection onto $E_-(\theta)$, and
+$\dim E_- = \operatorname{rank} P_\theta = \operatorname{tr} P_\theta$.
+
+\begin{proposition}[Gap-regime and threshold independence]
+\label{prop:gap:wellposed}
+Suppose the spectrum of $H$ has no point in an open interval
+$(\lambda_{\mathrm{lo}},\lambda_{\mathrm{hi}})$ with
+$\lambda_{\mathrm{lo}}<\lambda_{\mathrm{hi}}<0$, and write
+$\Delta := \lambda_{\mathrm{hi}}-\lambda_{\mathrm{lo}}$ for the gap width.
+Then for every threshold
+$\theta \in (-\lambda_{\mathrm{hi}},-\lambda_{\mathrm{lo}})$ the contour
+$\Gamma$ may be chosen inside the resolvent set, the projector
+\eqref{eq:gap:riesz} is independent of $\theta$, and $\dim E_-$ is
+well-posed in the sense of Definition~\ref{def:gap:Eminus}. We call this the
+\emph{gap-regime} with gap $\Delta$.
+\end{proposition}
+
+\begin{proof}
+For any $\theta$ in the stated interval the circle through $-\theta$ misses
+$\sigma(H)$, so $(zI-H)^{-1}$ is holomorphic on a neighbourhood of $\Gamma$
+and \eqref{eq:gap:riesz} is well-defined. Two thresholds
+$\theta,\theta'$ in the interval give contours that are homotopic within the
+resolvent set; by Cauchy's theorem the integral is unchanged. Holomorphy of
+$P_\theta$ in the entries of $H$ then follows from holomorphy of the
+resolvent, and $\operatorname{tr}P_\theta$, being integer-valued and
+continuous, is locally constant~\cite{kato1995perturbation}.
+\end{proof}
+
+Outside the gap-regime --- when $\Delta\to 0$ --- the contour can no longer be
+threaded between the two eigenvalue clusters, $P_\theta$ loses continuity, and
+$\dim E_-$ becomes metrically unstable: it depends on the arbitrary choice of
+$\theta$. An absolute-threshold count $\#\{\beta\lambda_i>\mathrm{tol}\}$
+exhibits exactly this pathology, and any spectral diagnostic that omits the
+gap test will report a $\theta$-dependent artifact rather than an invariant.
+
+\subsection{Perturbation stability: the Davis--Kahan bound}
+\label{sec:gap:dk}
+
+The gap controls not only well-posedness but robustness. The following is the
+$\sin\Theta$ theorem of Davis and Kahan specialized to the count.
+
+\begin{proposition}[Stability of the invariant]
+\label{prop:gap:dk}
+Let $H$ be in the gap-regime with gap $\Delta$, and let $\delta H$ be a
+symmetric perturbation. If
+\begin{equation}
+  \|\delta H\|_{\mathrm{op}} \;<\; \tfrac12\,\Delta,
+  \label{eq:gap:dkbound}
+\end{equation}
+then $H+\delta H$ is again in the gap-regime and
+$\dim E_-(H+\delta H) = \dim E_-(H)$. Moreover the perturbed negative
+subspace satisfies $\|\sin\Theta(E_-,E_-')\| \le \|\delta H\|_{\mathrm{op}}/\Delta$,
+so the subspace --- not merely its dimension --- is stable.
+\end{proposition}
+
+\begin{proof}
+By Weyl's inequality every eigenvalue moves by at most
+$\|\delta H\|_{\mathrm{op}}$. Under \eqref{eq:gap:dkbound} no eigenvalue can
+cross the midpoint $-\theta_0$ with
+$\theta_0 = -\tfrac12(\lambda_{\mathrm{lo}}+\lambda_{\mathrm{hi}})$: the
+strongly negative cluster stays below $-\theta_0-\tfrac12\Delta+\|\delta H\|$
+and the near-zero cluster stays above $-\theta_0+\tfrac12\Delta-\|\delta H\|$,
+both strict. Hence the count is preserved and a residual gap remains. The
+subspace bound is the Davis--Kahan $\sin\Theta$ theorem~\cite{davis1970rotation} applied to the
+spectral projectors of $H$ and $H+\delta H$ for the contour separating the
+two clusters.
+\end{proof}
+
+The constant $\tfrac12$ in \eqref{eq:gap:dkbound} is sharp: a perturbation of
+operator norm $\Delta$ can move the two clusters toward each other by
+$\tfrac12\Delta$ each and merge them. The numerical study of
+Section~\ref{sec:gap:numerics} confirms the threshold to within the
+resolution of the perturbation grid.
+
+\subsection{The three windows are one gap condition}
+\label{sec:gap:windows}
+
+Earlier sections identified three regimes in which the rank-local description
+is valid: an \emph{energy window} (the Jacobi--Maupertuis curvature is
+controlled only for intermediate energy $E$), a \emph{separation window}
+(clusters must be neither overlapping nor disconnected), and a
+\emph{softness window} (the inverse temperature $\beta$ must be finite).
+Proposition~\ref{prop:gap:wellposed} unifies them: each is a coordinate
+section of the single condition $\Delta(H)>0$.
+
+\begin{itemize}
+  \item \emph{Separation.} When clusters overlap, inter- and intra-cluster
+    eigenvalues are no longer separated and $\Delta\to0$. When clusters are
+    mutually disconnected the inter-cluster eigenvalues themselves degenerate.
+    The valid band is exactly $\{\Delta>0\}$.
+  \item \emph{Softness.} As $\beta\to\infty$ on a generic query the Gibbs
+    measure $p$ concentrates on a single key; $\operatorname{Cov}_p(k)\to 0$
+    and the inter-cluster eigenvalues decay to zero faster than the
+    intra-cluster ones, closing the gap. For a \emph{symmetric} query --- one
+    invariant under permutation of clusters --- Schur's lemma forces the
+    covariance to commute with the symmetry group, the inter/intra block
+    structure is protected, and the gap survives at all $\beta$. The softness
+    window is the set of $(\beta,\text{query})$ pairs for which the gap is
+    open.
+  \item \emph{Energy.} The link to curvature is the one place where the gap
+    condition alone is \emph{not} sufficient; this is the subject of
+    Section~\ref{sec:gap:curvature}.
+\end{itemize}
+
+This is the central structural fact of the section: $\dim E_-$ is a
+meaningful invariant if and only if a spectral gap exists, and the empirical
+``windows'' are not independent phenomena but projections of $\{\Delta>0\}$
+onto the separation, temperature, and energy axes.
+
+\subsection{The energy-window caveat on curvature}
+\label{sec:gap:curvature}
+
+It is tempting to summarize the mechanism as ``negative Hessian implies
+negative Jacobi--Maupertuis curvature implies geodesic defocusing.'' This
+implication is \emph{false without an energy restriction}, and the failure is
+not a technicality. With JM conformal factor $h=2(E-F)$, the sectional
+curvature in two dimensions is
+\begin{equation}
+  K_{JM} \;=\; \frac{\Delta F}{h^2} \;+\; \frac{2\,|\nabla F|^2}{h^3},
+  \label{eq:gap:KJM}
+\end{equation}
+the sum of a Laplacian term and a strictly positive gradient term. At a point
+where $F$ is concave ($\Delta F<0$) the first term is negative, but for small
+$h$ --- that is, for energy $E$ close to $F$ --- the positive gradient term
+dominates and $K_{JM}>0$ (focusing). The curvature becomes negative only for
+$h>h^\star$ with
+\begin{equation}
+  h^\star \;=\; -\,\frac{2|\nabla F|^2}{\Delta F},
+  \qquad
+  E > E^\star = F + \tfrac12 h^\star.
+  \label{eq:gap:Estar}
+\end{equation}
+Thus a negative Hessian produces defocusing only inside the energy window
+$E>E^\star$; below it, the same concave landscape is focusing. Equation
+\eqref{eq:gap:Estar} is the precise form of the third window.
+
+\begin{proposition}[Gap-regime defocusing, with energy restriction]
+\label{prop:gap:defocus}
+Let $H$ be in the gap-regime, and restrict to the energy window $E>E^\star$
+of \eqref{eq:gap:Estar}. Then along a JM geodesic whose tangent plane is
+spanned by directions in $E_-$, the Jacobi equation $J''+K_{JM}J=0$ has
+$K_{JM}<0$ and admits an exponentially growing solution. The number of
+independent growing modes equals $\dim E_- = \operatorname{rank}P_\theta$, and
+their rates are the roots $z_+$ of the characteristic polynomial of
+Section~\ref{sec:inertial}.
+\end{proposition}
+
+The dynamical content of Proposition~\ref{prop:gap:defocus} --- that the
+\emph{count} $\dim E_-$ equals the \emph{number of unstable transport modes},
+at the rates predicted by the characteristic polynomial --- is verified
+directly in Section~\ref{sec:gap:numerics}. We emphasize the logical
+structure: the gap condition makes the count well-posed and stable
+(Propositions~\ref{prop:gap:wellposed}--\ref{prop:gap:dk}); the energy window
+makes the count equal to a number of defocusing directions
+(Proposition~\ref{prop:gap:defocus}). Both are required, and they are
+independent.
+
+\subsection{Count equals number of unstable inertial modes}
+\label{sec:gap:inertial}
+
+The geometric statement of Proposition~\ref{prop:gap:defocus} has a purely
+dynamical counterpart in the inertial flow of Section~\ref{sec:inertial}. Linearizing the
+damped flow $\ddot x + \gamma\dot x = -\nabla\Phi_\beta(x)$ about a stationary
+point decouples it, in the Hessian eigenbasis, into scalar oscillators
+$\ddot a_k + \gamma\dot a_k + \kappa_k a_k = 0$ with $\kappa_k$ the $k$-th
+eigenvalue of $H$. For $\kappa_k<0$ the characteristic polynomial
+$z^2+\gamma z+\kappa_k=0$ has one positive root
+\begin{equation}
+  z_+(\kappa_k)
+   \;=\; \tfrac12\!\left(-\gamma + \sqrt{\gamma^2 + 4|\kappa_k|}\,\right),
+  \label{eq:gap:zplus}
+\end{equation}
+so each negative eigenvalue contributes exactly one exponentially growing
+direction. The number of such directions is $\dim E_-$, and in the
+zero-damping limit $z_+(\kappa_k)\to\sqrt{|\kappa_k|}$ recovers the
+JM-geodesic defocusing rate of Proposition~\ref{prop:gap:defocus}: the damped
+mechanical picture and the geodesic picture are the same instability. The
+spectral gap reappears here as a \emph{rate gap} --- the inter-cluster modes
+grow at $O(1)$ rates while the intra-cluster modes are effectively flat ---
+which is what makes the count observable in finite integration time.
+
+\subsection{Numerical verification}
+\label{sec:gap:numerics}
+
+Figure~\ref{fig:gap} verifies the four claims of this section on a single
+geometry: $m=5$ clusters in $d=24$ dimensions, pure attention
+$H=-\beta\operatorname{Cov}_p(k)$, evaluated at a symmetric equilibrium query.
+
+\emph{(S1) Threshold independence.} The Riesz count
+$\operatorname{tr}P_\theta$, evaluated on a contour inside the gap, equals
+$m-1=4$ exactly; the eigenvalue count $\#\{\lambda<-\theta\}$ is flat across
+the entire gap, confirming Proposition~\ref{prop:gap:wellposed}.
+
+\emph{(S2) Davis--Kahan bound.} Under random symmetric perturbations of
+controlled operator norm, $\dim E_-$ is preserved in $100\%$ of trials for
+$\|\delta H\|_{\mathrm{op}}\le\tfrac12\Delta$ and collapses sharply beyond,
+confirming Proposition~\ref{prop:gap:dk} and the sharpness of the constant
+$\tfrac12$.
+
+\emph{(S3) Energy-window caveat.} On a concave free-energy landscape
+($\Delta F<0$), $K_{JM}$ from \eqref{eq:gap:KJM} is positive for $E<E^\star$
+and negative only for $E>E^\star$, confirming \eqref{eq:gap:Estar} and the
+necessity of the energy restriction in Proposition~\ref{prop:gap:defocus}.
+
+\emph{(S4) Count equals unstable-mode count.} Integrating the inertial flow
+at damping $\gamma=0.5$, exactly $m-1=4$ eigendirections amplify
+exponentially; their measured rates agree with $z_+(\kappa_k)$ of
+\eqref{eq:gap:zplus} to within $0.3\%$ (e.g.\ mode~1: measured $0.4034$,
+predicted $0.4037$), while the intra-cluster modes remain flat.
+
+The synthetic verification above exercises the spectral side of the
+mechanism --- the count $\dim E_-$, its stability, and the unstable-mode
+rates. The geometric side --- the curvature formula \eqref{eq:gap:KJM} and
+the geodesic defocusing it predicts --- is verified separately, as a
+free-standing experiment, in Section~\ref{sec:gap:jacobi}.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\textwidth]{section6_diagnostic.png}
+  \caption{The Gap-Statement on one geometry ($m=5$ clusters, $d=24$, pure
+  attention). \textbf{(S1)} The Riesz count $\operatorname{rank}P_\theta$ is
+  flat across the spectral gap: $\dim E_-$ is threshold-free.
+  \textbf{(S2)} $\dim E_-$ is preserved under perturbations of operator norm
+  below $\tfrac12\Delta$ and collapses beyond; the Davis--Kahan bound is
+  sharp. \textbf{(S3)} On a concave landscape $K_{JM}>0$ (focusing) for
+  $E<E^\star$ and $K_{JM}<0$ (defocusing) only above: a negative Hessian does
+  not imply negative curvature without the energy window. \textbf{(S4)}
+  Integrating the inertial flow, exactly $\dim E_- = m-1$ eigendirections
+  amplify, at the characteristic-polynomial rates $z_+$ (dashed); the
+  intra-cluster modes stay flat.}
+  \label{fig:gap}
+\end{figure}
+
+\subsection{The Jacobi--Maupertuis metric and geodesic verification}
+\label{sec:gap:jacobi}
+
+Section~\ref{sec:gap:curvature} stated the energy-window caveat through
+the sectional curvature $K_{JM}$, and Proposition~\ref{prop:gap:defocus}
+asserted that in the gap-regime, inside the energy window, a geodesic
+defocuses at a rate set by the Jacobi equation. That assertion was used
+above but not itself put to a direct test. This subsection does so: it
+makes the Jacobi--Maupertuis geometry explicit, and verifies --- as a
+free-standing numerical experiment --- that the curvature formula
+\eqref{eq:gap:KJM} predicts geodesic defocusing not merely in sign but
+quantitatively.
+
+\paragraph{The Jacobi--Maupertuis metric of the transport flow.}
+The undamped limit ($\gamma=0$) of the inertial flow
+\eqref{eq:prelim:inertial} is a conservative mechanical system: a particle
+of unit mass moving in the potential $F=\Phi_\beta$ with conserved energy
+$E=\tfrac12\|\dot x\|^2+F(x)$. By the Maupertuis principle of least
+action, the trajectories of such a system at fixed energy $E$ are, after
+reparametrisation, the geodesics of the conformally rescaled metric
+\begin{equation}
+  g_{JM} \;=\; h(x)\,g_0,
+  \qquad
+  h(x) \;=\; 2\bigl(E-F(x)\bigr),
+  \label{eq:jacobi:metric}
+\end{equation}
+where $g_0$ is the flat metric on the configuration space and $h$ is the
+conformal factor; the trajectory is confined to the classically allowed
+region $\{F<E\}$ where $h>0$. The geodesic action
+$\int\sqrt{g_{JM}(\dot x,\dot x)}\,ds$ replaces the mechanical action, and
+the transport flow becomes, exactly, geodesic motion on the manifold
+$(\{F<E\},g_{JM})$. The curvature that controls the stability of these
+geodesics is the sectional curvature of $g_{JM}$; for a two-dimensional
+configuration space the conformal-rescaling formula gives
+\eqref{eq:gap:KJM},
+\begin{equation*}
+  K_{JM}
+   \;=\; \frac{\Delta F}{h^2} \;+\; \frac{2\,|\nabla F|^2}{h^3}
+   \;=\; -\,\frac{\Delta(\log h)}{2h},
+\end{equation*}
+the two forms being equal by direct computation. The curvature is thus
+not an analogy imported from general relativity but an exact property of
+the transport metric \eqref{eq:jacobi:metric}: the softmax-measure
+dynamics, through its potential $F$ and energy level $E$, determines the
+conformal factor $h$, and $h$ determines the metric tensor and its
+curvature.
+
+\paragraph{The Jacobi deviation equation.}
+The quantity of interest is whether two geodesics that start close
+together stay close. Let $\eta(s)$ be the magnitude of the perpendicular
+separation, in the metric $g_{JM}$, between a reference geodesic and an
+infinitesimally displaced neighbour, parametrised by arc length $s$. The
+separation obeys the Jacobi deviation equation
+\begin{equation}
+  \frac{d^2\eta}{ds^2} \;+\; K_{JM}(s)\,\eta \;=\; 0,
+  \label{eq:jacobi:deviation}
+\end{equation}
+with $K_{JM}(s)$ the sectional curvature evaluated along the reference
+geodesic. Where $K_{JM}<0$, equation \eqref{eq:jacobi:deviation} has
+exponentially growing solutions: neighbouring geodesics defocus, and the
+transport flow is unstable. This is the precise dynamical content of a
+negative free-energy Hessian --- and it is a falsifiable prediction, since
+both sides of \eqref{eq:jacobi:deviation} can be measured independently.
+
+\paragraph{The verification experiment.}
+We test the chain end to end on a synthetic free-energy landscape chosen
+to exhibit a wide region of negative curvature: a two-dimensional
+potential $F=\Phi_\beta$ built from a ring of eight component centres,
+with $\beta$ and $E$ set so that the classically allowed region contains
+an extended segment with $K_{JM}<0$. The test has two stages.
+
+\emph{Stage 1 --- the curvature formula.} On a grid over the allowed
+region we compare the closed-form curvature \eqref{eq:gap:KJM}, evaluated
+from $F$, $\nabla F$, $\Delta F$, against a direct finite-difference
+evaluation of $-\Delta(\log h)/(2h)$. The two agree to a median relative
+error of $3.7\times10^{-4}$ (90th percentile $2.7\times10^{-3}$). The
+residual is consistent with the second-order truncation error of the
+finite-difference stencil on the chosen grid spacing, and decreases under
+grid refinement; it is not a modelling discrepancy but the discretisation
+error of the reference quantity. The closed-form curvature formula is thus
+numerically confirmed.
+
+\emph{Stage 2 --- geodesic defocusing.} We integrate a reference geodesic
+of \eqref{eq:jacobi:metric} across the negative-curvature segment (arc
+length $s\in[0,1.98]$, with $K_{JM}(s)\in[-3.01,0]$ everywhere along the
+path), together with an infinitesimally displaced neighbour, and measure
+the perpendicular separation $\eta(s)$ directly from the geodesic pair.
+Independently, we integrate the scalar Jacobi equation
+\eqref{eq:jacobi:deviation} using the measured $K_{JM}(s)$ profile. The
+two curves --- the separation read off from the geodesic bundle, and the
+solution of the deviation equation --- coincide to a maximum relative
+deviation that rounds to $0.00\%$ at the reported precision, i.e.\ to
+within the numerical-integration tolerance. The separation amplifies by a
+factor $2.7$ across the segment, and the measured and predicted
+amplifications agree to the same precision. The agreement holds not only
+for the net amplification but for the full non-monotone profile,
+including the initial mild contraction near the boundary (where
+$K_{JM}\to0$) followed by exponential growth in the curvature well.
+
+\paragraph{What the experiment establishes, and what it does not.}
+The experiment establishes that, on the tested geometry, the
+curvature formula \eqref{eq:gap:KJM} predicts geodesic defocusing
+\emph{quantitatively} --- the Jacobi deviation equation driven by the
+derived curvature reproduces the measured geodesic-bundle separation to
+integration precision. The transport instability of
+Proposition~\ref{prop:gap:defocus} is therefore not a sign argument but a
+sharp, verified geometric law. Two limitations are stated plainly. First,
+the verification is on a synthetic free-energy landscape: it tests the
+geometric mechanism, not its occurrence in a trained model --- that is the
+separate question of Section~\ref{sec:gap:empirical}. Second, the
+construction is two-dimensional, where $K_{JM}$ is a scalar; in higher
+dimensions the sectional curvature is an operator and the conformal
+formula generalises but is not verified here. Within that scope, the
+conclusion is unambiguous: the geodesics of the transport metric obey the
+Jacobi equation of the derived curvature, exactly.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.92\textwidth]{geodesic_diagnostic.png}
+  \caption{Geodesic verification of the Jacobi--Maupertuis curvature.
+  \emph{Left:} the curvature field $K_{JM}$ over a synthetic free-energy
+  landscape (ring of eight component centres); the reference geodesic
+  traverses the negative-curvature interior. \emph{Right:} perpendicular
+  separation $\eta$ of a geodesic bundle versus arc length $s$, on a
+  logarithmic scale. The separation measured directly from the geodesic
+  pair (markers) and the solution of the Jacobi deviation equation
+  $\eta''+K_{JM}\eta=0$ driven by the derived curvature (solid) coincide
+  to a maximum relative deviation that rounds to $0.00\%$ at the reported
+  precision --- agreement to within the integration tolerance. The WKB
+  envelope $|K_{JM}|^{-1/4}\exp\!\int\!\sqrt{|K_{JM}|}\,ds$ (dotted) is
+  shown for reference. Independently, the closed-form curvature formula
+  \eqref{eq:gap:KJM} matches a direct finite-difference evaluation of
+  $-\Delta(\log h)/(2h)$ to a median relative error of
+  $3.7\times10^{-4}$; this residual is the second-order truncation error
+  of the finite-difference stencil and decreases under grid refinement,
+  not a discrepancy of the formula. The non-monotone profile --- mild
+  contraction near the boundary where $K_{JM}\to0$, then exponential
+  defocusing in the curvature well, net amplification $2.7\times$ --- is
+  reproduced by the deviation equation across its entire length.}
+  \label{fig:jacobi}
+\end{figure}
+
+\subsection{Empirical validation on a trained transformer}
+\label{sec:gap:empirical}
+
+The verification of Section~\ref{sec:gap:numerics} was synthetic: the
+cluster geometry was constructed to exhibit a gap.  A sharper question is
+whether the gap-regime occurs in a \emph{trained} network, where nothing
+enforces it.  We therefore instrumented a Llama-3.2-1B model~\cite{grattafiori2024llama}
+($16$ layers, $32$ heads, head dimension $D=64$) and captured, for every
+attention head at every layer, the post-rotary keys, the softmax weights of
+each query, and hence the Hessian $H=-\beta\operatorname{Cov}_p(k)$ with
+$\beta=D^{-1/2}$ the scaled-dot-product temperature.  Eigenvalues were
+computed in single precision.  The corpus was WikiText-2~\cite{merity2017pointer}; three context
+lengths $N_{\mathrm{kv}}\in\{512,2048,8192\}$ were measured, yielding
+$46{,}080$ head-positions in total.  This is a single model on a single
+corpus, and the conclusions are stated with that scope.
+
+\paragraph{Genuine gaps are the rule, not the exception.}
+The gap must be assessed by a scale-free criterion: the relative gap
+$\Delta(H)/|\lambda_{\max}(H)|$, since the spectral scale itself varies
+across layers and context lengths and an absolute threshold would be
+miscalibrated.  Using $\Delta/|\lambda_{\max}|>0.05$ as the genuine-gap
+test, $96\%$ of all head-positions are in the gap-regime, and the figure is
+essentially independent of the threshold over $[0.05,0.1]$.  Restricted to
+layers~$1$ through~$15$ the fraction rises to $97\text{--}98\%$.  The
+gap-regime --- the precondition under which $\dim E_-$ is a well-posed
+invariant (Proposition~\ref{prop:gap:wellposed}) --- is thus not a
+synthetic artefact; it is the typical state of attention in a trained
+transformer.
+
+\paragraph{An explosive phase transition at the first layer.}
+Stratifying by layer reveals a sharp structure.  The input layer~$0$ is
+\emph{pre-cluster}: its median gap is small ($\Delta\approx0.5$) and a
+large fraction of its heads show no gap at all.  Between layer~$0$ and
+layer~$1$ the median gap jumps by an order of magnitude --- to
+$\Delta\approx6$ --- and then varies only mildly across layers~$2$--$15$
+(the ratio of the layer-$1$ median to the layer-$2$--$15$ plateau mean is
+$0.78\text{--}0.86$ across the three context lengths).  The dispersion of
+$\Delta$ shows the same jump.  The geometry is therefore not built
+gradually through a representational hierarchy; it appears in a single step
+at the first layer and is merely refined thereafter.  This is consistent
+with the interpretation of layer~$0$ as operating on raw token embeddings,
+before the network has assembled the contextual clusters that the
+free-energy picture describes: where the precondition fails, it fails for a
+structural reason, and it fails in exactly one identifiable place.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=0.92\textwidth]{layer_evolution.png}
+  \caption{Layer-stratified gap evolution on a trained Llama-3.2-1B,
+  three context lengths. \emph{Left:} the median spectral gap
+  $\Delta(H)$ jumps by an order of magnitude between the input layer~$0$
+  and layer~$1$, then plateaus --- an explosive phase transition, not a
+  gradual hierarchy. \emph{Right:} the dispersion of $\Delta(H)$ shows the
+  same jump. The pre-cluster input layer is the one identifiable place
+  where the gap-regime precondition fails.}
+  \label{fig:layer}
+\end{figure}
+
+\paragraph{One dominant mode.}
+Among genuine-gap heads, $96\text{--}98\%$ in layers~$1$--$15$ have
+$\dim E_- = 1$: a single dominant defocusing mode.  The fraction of such
+``clean single-mode'' heads jumps from $0.42$ at layer~$0$ to $0.95$ at
+layer~$1$ and holds across the remaining layers.  The naive count can also
+saturate at $\dim E_- = D-1$; this is not a rich multi-cluster structure
+but the counter running out of dimensions when no gap exists, and it occurs
+almost exclusively in layer~$0$.  A guard against this saturation --- reading
+$\dim E_- \approx D-1$ as ``no gap'' rather than ``many clusters'' --- is
+necessary for any spectral diagnostic, and is recorded as a known
+failure mode.  The practical picture of a trained attention head is thus
+simple: one strongly-negative transport direction, cleanly separated from a
+near-zero bulk.
+
+\paragraph{Scope and the routing signal.}
+Two limitations are stated plainly.  First, the rank-local dispatcher of
+Section~\ref{sec:multiaxis} routes on the participation ratio of the
+\emph{query} covariance $\operatorname{Cov}(Q)$, a different object from the
+softmax-weighted key covariance $\operatorname{Cov}_p(k)$ of the theory; on
+this corpus the two are statistically uncorrelated (Spearman
+$|\rho|\lesssim0.25$ at every layer), so the dispatcher signal does not
+track the spectral gap.  This is consistent with the synthetic finding that
+the participation ratio is gap-blind.  Second, because gap-closure is
+confined almost entirely to layer~$0$, this corpus cannot test the regime
+$\Delta\to0$ on the deeper layers; whether corpora with heavier repetition
+(code, structured data) populate that regime more is left open.  Neither
+limitation weakens the central empirical result: on a trained transformer
+the gap-regime precondition holds for the overwhelming majority of attention
+heads, it is established by an explosive transition at the first layer, and
+the typical head carries exactly one dominant mode.
+
+\subsection{Summary}
+\label{sec:gap:summary}
+
+The negative subspace $E_-$ of the free-energy Hessian is a topological
+invariant --- threshold-free via the Riesz projector
+(Proposition~\ref{prop:gap:wellposed}), perturbation-stable via Davis--Kahan
+(Proposition~\ref{prop:gap:dk}) --- exactly inside the gap-regime
+$\Delta(H)>0$. The three operating windows of the earlier sections are the
+separation, temperature, and energy sections of this one condition. The link
+from the invariant to transport instability requires, in addition, the energy
+window $E>E^\star$ of \eqref{eq:gap:Estar}; with both conditions in force,
+$\dim E_-$ equals the number of exponentially defocusing geodesic directions
+and equally the number of unstable modes of the inertial flow, at the rates
+$z_+$ of the characteristic polynomial. This is the spectral foundation on
+which the adaptive rank-local routing of Section~\ref{sec:multiaxis} rests:
+the router's effective rank $r^\star$ is well-defined precisely when
+$\Delta(H)>0$, and the regime $\Delta\to0$ is the structural --- not
+numerical --- signature of the transition to the dense regime.
+Section~\ref{sec:gap:empirical} confirms that this foundation is not merely
+synthetic: on a trained Llama-3.2-1B the gap-regime holds for $96\%$ of
+attention heads, established by an explosive transition at the first layer,
+with the typical head carrying exactly one dominant mode.

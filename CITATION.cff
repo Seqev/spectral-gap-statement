@@ -1,0 +1,34 @@
+cff-version: 1.2.0
+title: >-
+  The Spectral Gap-Statement: When the Negative Subspace of
+  Attention Transport is a Well-Posed Invariant
+message: >-
+  If you use this software or manuscript, please cite it
+  using the metadata below.
+type: software
+authors:
+  - given-names: Evgeny
+    family-names: Vyaltsev
+  - given-names: Daniil
+    family-names: Vyaltsev
+abstract: >-
+  Attention can be viewed as a convex transport process whose
+  free-energy Hessian governs an instability of mass transport.
+  This work shows that the count of negative Hessian eigenvalues,
+  dim E_-, is a topological invariant - threshold-free via the
+  Riesz spectral projector and stable under perturbations below
+  half the spectral gap by the Davis-Kahan theorem - exactly when
+  the free-energy Hessian possesses a spectral gap. The geometry
+  is verified through synthetic consolidation experiments, a
+  direct geodesic / Jacobi-equation verification of the curvature
+  formula, and an empirical study on a trained Llama-3.2-1B.
+keywords:
+  - attention
+  - optimal transport
+  - Wasserstein geometry
+  - spectral perturbation theory
+  - Jacobi-Maupertuis metric
+  - transformer interpretability
+license: MIT
+version: 1.0.0
+date-released: '2026-05-17'

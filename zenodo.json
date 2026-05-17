@@ -1,0 +1,27 @@
+{
+  "metadata": {
+    "title": "The Spectral Gap-Statement: When the Negative Subspace of Attention Transport is a Well-Posed Invariant",
+    "upload_type": "publication",
+    "publication_type": "preprint",
+    "description": "Attention can be viewed as a convex transport process whose free-energy Hessian governs an instability of mass transport: a negative eigenvalue produces an exponentially growing mode. The number of such modes, dim E_-, is used as a routing signal, but a count of negative eigenvalues is only meaningful if the spectrum separates the negative modes from the rest. This work shows that dim E_- is a topological invariant - threshold-free via the Riesz spectral projector, and stable under perturbations of operator norm below half the spectral gap by the Davis-Kahan theorem - exactly when the free-energy Hessian possesses a gap. The three empirical operating windows of the framework are shown to be three coordinate sections of this single spectral condition. The geometry is verified end to end: a synthetic consolidation experiment, a direct geodesic / Jacobi-equation verification of the curvature formula, and an empirical study on a trained Llama-3.2-1B. The repository contains the manuscript source, the compiled PDF, and the numerical scripts that reproduce every figure and quantitative claim.",
+    "creators": [
+      { "name": "Vyaltsev, Evgeny" },
+      { "name": "Vyaltsev, Daniil" }
+    ],
+    "keywords": [
+      "attention",
+      "optimal transport",
+      "Wasserstein geometry",
+      "spectral perturbation theory",
+      "Jacobi-Maupertuis metric",
+      "transformer interpretability",
+      "Davis-Kahan theorem",
+      "Riesz projector"
+    ],
+    "license": "MIT",
+    "access_right": "open",
+    "version": "1.0.0",
+    "language": "eng",
+    "notes": "Code released under the MIT License; manuscript text and figures under CC BY 4.0. See LICENSE for details."
+  }
+}

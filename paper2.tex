@@ -1,0 +1,262 @@
+% =====================================================================
+%  Paper 2 -- The Spectral Gap-Statement for Attention Transport Geometry
+%  Assembled from the ready Section 6 (Gap-Statement) plus a minimal
+%  self-contained preliminaries recap.  NO new theory: the body is the
+%  existing Section 6 verbatim; the wrapper only makes it standalone.
+% =====================================================================
+\documentclass[11pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{graphicx}
+\graphicspath{{figures/}{./}}
+\usepackage{booktabs}
+\usepackage[margin=1in]{geometry}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+
+% The Phi-Transport viewpoint is the conceptual origin of this work but
+% is NOT a published reference; this paper is self-contained and does not
+% depend on it.  The macro expands to a plain descriptive phrase, no cite.
+\newcommand{\PaperOne}{the $\Phi$-Transport viewpoint}
+
+\title{\textbf{The Spectral Gap-Statement:}\\[2pt]
+  \large When the Negative Subspace of Attention Transport
+  is a Well-Posed Invariant}
+\author{Evgeny Vyaltsev \and Daniil Vyaltsev}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+% =====================================================================
+\begin{abstract}
+The $\Phi$-Transport framework casts attention as a convex transport
+process whose free-energy Hessian governs an instability of mass
+transport: a negative eigenvalue produces an exponentially growing
+mode. The adaptive rank-local router built on that framework implicitly
+assumes that the \emph{number} of such modes, $\dim E_-$, is a
+well-defined integer. This paper makes that assumption precise. We show
+that $\dim E_-$ is a topological invariant --- threshold-free via the
+Riesz spectral projector, and stable under perturbations of operator norm
+below half the spectral gap, by the Davis--Kahan theorem --- exactly when
+the free-energy Hessian possesses a gap, $\Delta(H)>0$. The three
+empirical operating ``windows'' of the framework (energy, separation,
+softness) are shown to be three coordinate sections of this single
+spectral condition. The link from the invariant to geometric defocusing
+requires, in addition, an energy-window restriction on the
+Jacobi--Maupertuis curvature, which we state precisely. Finally, we
+validate the picture on a trained Llama-3.2-1B: the gap-regime holds for
+$96\%$ of attention heads, it is established by an explosive phase
+transition at the first layer, and the typical head carries exactly one
+dominant transport mode. The geometry the framework predicts is not a
+synthetic artefact; it is the typical state of attention in a trained
+transformer.
+\end{abstract}
+
+% =====================================================================
+\section{Introduction}
+\label{sec:intro}
+
+This paper adopts \PaperOne{}: the observation that several
+machine-learning primitives --- empirical sorting, radix sorting,
+equal-mass occupancy, and LogSumExp attention --- can be cast as special
+cases of a single convex transport potential $\Phi$. A consequence
+of that viewpoint is an inertial Wasserstein flow whose damped dynamics
+are governed by a characteristic polynomial $z^2+\gamma z+\kappa=0$: when
+the free-energy Hessian has a negative eigenvalue $\kappa<0$, the flow has
+an exponentially growing mode, and transport mass defocuses.
+
+The framework's adaptive rank-local router exploits this: it routes a
+query to a low-rank sparse path when the effective number of unstable
+transport directions is small. That number is the dimension $\dim E_-$ of
+the negative subspace of the free-energy Hessian. The router's empirical
+law, $r^\star\approx d_{\mathrm{eff}}-1$, treats $\dim E_-$ as a
+well-defined integer --- but a count of negative eigenvalues is only
+well-posed if the spectrum actually separates the negative modes from the
+rest. When it does not, the count depends on an arbitrary tolerance, and
+the router's premise dissolves.
+
+This paper supplies the missing precision. Its single technical object is
+the \emph{spectral gap} $\Delta(H)$ of the free-energy Hessian
+$H$, and its single thesis is that $\dim E_-$ is a meaningful invariant
+exactly inside the regime $\Delta(H)>0$. The contributions are:
+\begin{itemize}
+  \item A threshold-free definition of $\dim E_-$ via the Riesz spectral
+    projector, and a proof (Proposition~\ref{prop:gap:wellposed}) that it
+    is well-posed precisely in the gap-regime.
+  \item A perturbation-stability theorem
+    (Proposition~\ref{prop:gap:dk}): $\dim E_-$ is preserved under any
+    symmetric perturbation of operator norm below $\tfrac12\Delta$, by
+    Davis--Kahan.
+  \item The unification of the framework's three empirical operating
+    windows --- energy, separation, softness --- as three coordinate
+    sections of the single condition $\Delta(H)>0$.
+  \item A precise energy-window caveat
+    (Proposition~\ref{prop:gap:defocus}) on the implication
+    ``negative Hessian $\Rightarrow$ negative curvature'': it is false
+    without an energy restriction, and we give the exact threshold.
+  \item An empirical validation on a trained Llama-3.2-1B
+    (\S\ref{sec:gap:empirical}): the gap-regime is the typical state of
+    attention, established by an explosive phase transition at layer~1.
+\end{itemize}
+
+The body of the paper is Section~\ref{sec:gap}. Section~\ref{sec:prelim}
+first recaps, self-containedly, the minimal $\Phi$-Transport material the
+argument depends on.
+
+% =====================================================================
+\section{Preliminaries: the free-energy potential and the inertial flow}
+\label{sec:prelim}
+
+This section develops, self-containedly, the three elements of the
+$\Phi$-Transport viewpoint that the Gap-Statement builds on: the
+free-energy potential, the inertial flow it induces, and the role of
+damping. The material is elementary --- the central identity is the
+Hessian of the cumulant-generating function of an exponential family ---
+and is given here so that the paper depends on no external source.
+
+\paragraph{The free-energy potential.}
+\label{sec:prelim:phi}
+$\Phi$-Transport represents a family of machine-learning primitives by a
+single convex potential. For the case of interest here, the potential is
+the free energy
+\begin{equation}
+  \Phi_\beta(x) \;=\; \frac1\beta\,\log\sum_j e^{-\beta U_j(x)},
+  \label{eq:prelim:phi}
+\end{equation}
+with $\beta$ an inverse temperature and $U_j$ a family of component
+potentials. LogSumExp attention is the special case
+$U_j(x)=-\langle x,k_j\rangle$, with the keys $k_j$ as component data.
+
+\paragraph{The inertial Wasserstein flow.}
+\label{sec:inertial}
+The framework's central dynamical result is that hysteresis in the
+transport map induces an \emph{inertial} flow in the space of measures:
+mass does not follow the gradient of $\Phi_\beta$ directly but obeys a
+damped second-order equation,
+\begin{equation}
+  \ddot x + \gamma\,\dot x \;=\; -\nabla\Phi_\beta(x),
+  \label{eq:prelim:inertial}
+\end{equation}
+with $\gamma$ a damping coefficient. Linearizing about a stationary point
+and diagonalizing the Hessian decouples \eqref{eq:prelim:inertial} into
+scalar oscillators $\ddot a_k+\gamma\dot a_k+\kappa_k a_k=0$, one per
+Hessian eigenvalue $\kappa_k$. The characteristic polynomial
+$z^2+\gamma z+\kappa_k=0$ then determines stability: for $\kappa_k<0$ it
+has a positive root, and the mode $a_k$ grows exponentially. This is the
+transport instability whose \emph{count} the present paper makes precise.
+
+\paragraph{The entropy-induced friction tensor.}
+\label{sec:friction}
+The damping in \eqref{eq:prelim:inertial} need not be a free scalar: in
+the $\Phi$-Transport viewpoint it arises as an entropy-induced friction
+tensor, a state-dependent operator whose ellipticity controls whether the
+flow is dissipative. For the present paper only the scalar reduction is
+needed --- $\gamma$ enters solely through the characteristic polynomial ---
+so we use the scalar form throughout; the tensor form is not required for
+any result below.
+
+\paragraph{The adaptive rank-local router.}
+\label{sec:multiaxis}
+Built on the above, the framework's router selects, per query, an
+effective rank $r^\star$ for a low-rank sparse attention path. Its
+empirical calibration follows the law $r^\star\approx
+d_{\mathrm{eff}}-1$, where $d_{\mathrm{eff}}$ is a participation ratio of
+the query covariance. The present paper does not modify the router; it
+clarifies when the integer $r^\star$ that the router relies on is a
+well-defined quantity at all.
+
+\medskip
+\noindent
+With these four items in hand --- the free-energy potential
+\eqref{eq:prelim:phi}, the inertial flow \eqref{eq:prelim:inertial}, the
+friction tensor, and the router --- the Gap-Statement of
+Section~\ref{sec:gap} is self-contained.
+
+% =====================================================================
+%  BODY -- the existing Section 6, included verbatim.
+%  (The \section heading inside the file becomes Section 3 here.)
+% =====================================================================
+\input{section6_body.tex}
+
+% =====================================================================
+\section{Related work}
+\label{sec:related}
+
+\paragraph{Geometry of the space of measures.}
+The picture used here --- a free-energy functional whose Wasserstein
+Hessian governs the stability of a transport flow --- sits in the
+Otto-calculus tradition. Otto's formal Riemannian structure on the space
+of probability measures~\cite{otto2001geometry} and the variational
+(JKO) formulation of diffusion~\cite{jordan1998variational} established
+that gradient flows of free energy are geodesic-type objects;
+Ambrosio, Gigli and Savar\'{e}~\cite{ambrosio2008gradient} and
+Villani~\cite{villani2009optimal} give the rigorous metric theory. The
+Brenier polar-factorization theorem~\cite{brenier1991polar} is what makes
+the static transport map a $W_2$ object. Lott and
+Villani~\cite{lott2009ricci} connect displacement convexity to a
+synthetic Ricci-curvature bound; the present paper's Jacobi--Maupertuis
+curvature and its sign condition are a finite-dimensional, attention-
+specific instance of that displacement-curvature circle of ideas. Our
+contribution is not the geometry itself but the spectral
+\emph{well-posedness} question --- when the negative-eigenvalue count is
+an invariant --- which the metric-geometry literature does not address
+because it works with the full operator rather than an integer count.
+
+\paragraph{Spectral perturbation theory.}
+The two technical pillars are classical. The Riesz projector and the
+analyticity of spectral subspaces are from Kato's perturbation
+theory~\cite{kato1995perturbation}; the stability of an invariant
+subspace under a perturbation small relative to the spectral gap is the
+Davis--Kahan $\sin\Theta$ theorem~\cite{davis1970rotation}. The present
+paper applies them not to a numerical-linear-algebra problem but to the
+free-energy Hessian of attention, where the gap acquires a mechanistic
+meaning: it is exactly the condition under which the transport-instability
+count is physical.
+
+\paragraph{Attention and efficient transformers.}
+Attention~\cite{vaswani2017attention} is treated here as one instance of a
+free-energy potential; the LogSumExp form is the bridge. On the systems
+side, FlashAttention~\cite{dao2022flashattention} and its decode variants
+established the streaming-from-HBM pattern that the $\Phi$-Transport
+router builds on. The empirical study is on
+Llama-3.2-1B~\cite{grattafiori2024llama} over
+WikiText-2~\cite{merity2017pointer}. This paper does not propose a new
+attention mechanism; it supplies the spectral foundation under an existing
+adaptive router, and asks whether the geometry that foundation predicts is
+actually present in a trained model.
+
+% =====================================================================
+\section{Conclusion}
+\label{sec:conclusion}
+
+The negative subspace of the free-energy Hessian is the object on which
+the $\Phi$-Transport router rests, and this paper has shown when that
+object is mathematically well-defined: exactly inside the gap-regime
+$\Delta(H)>0$. Inside it, $\dim E_-$ is threshold-free (the Riesz
+projector) and perturbation-stable (Davis--Kahan); the framework's three
+empirical windows are one spectral condition seen from three coordinate
+axes; and the link to geometric defocusing holds under one additional,
+precisely-stated energy restriction. The measurement on a trained
+Llama-3.2-1B closes the argument: the gap-regime is not a property of
+hand-built synthetic geometry but the ordinary state of attention in a
+working transformer, reached by an explosive transition at the first
+layer, with the typical head carrying exactly one dominant transport
+mode. The router's effective rank is therefore a well-posed quantity in
+the regime where the router operates --- and the regime $\Delta\to0$, far
+from being a numerical nuisance, is the structural signature of the
+transition to dense attention.
+
+% =====================================================================
+\bibliographystyle{plain}
+\bibliography{refs}
+
+\end{document}
