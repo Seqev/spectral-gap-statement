@@ -110,6 +110,25 @@ Stated plainly, as in the manuscript:
 - The empirical study (§3.9) is a single model (Llama-3.2-1B) on a single
   corpus (WikiText-2); conclusions are stated with that scope.
 
+## Research program status
+
+This paper is the surviving, operator-theoretic core of a larger research
+program. That program asked a stronger question — whether the spectral
+geometry of attention is a *core computational mechanism* — and answered
+it through a sequence of falsification tests: a cross-model stress test, a
+random-control test, and a matched-control causal intervention. The strong
+mechanistic hypothesis **did not survive**: a causal ablation of the
+dominant spectral mode, controlled for perturbation magnitude, produced a
+pre-registered null result. The transport geometry is real as a
+description but causally inert as a mechanism for next-token prediction.
+
+The Gap-Statement itself — the operator-theoretic content of this paper —
+is unaffected: it is a correct formalization, and it stands. But readers
+should not extrapolate from it to a claim that the spectral geometry
+*drives* computation; that claim was tested and refuted. The full arc,
+including the refuted hypotheses, is documented in
+[`RESEARCH_PROGRAM_SUMMARY.md`](RESEARCH_PROGRAM_SUMMARY.md).
+
 ## Citation
 
 If you use this work, please cite it via its archived DOI:
